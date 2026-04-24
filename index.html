@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳转页面</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* 高 DPI 屏幕优化 */
+        @media (min-resolution: 2dppx) {
+            input, button {
+                font-size: 1.1rem;
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input id="inputBox" type="text" placeholder="请输入内容" />
+        <button onclick="parseNumber(event)">跳转！</button>
+    </div>
+
+    <script>
+    function parseNumber(e) {
+        const value = document.getElementById("inputBox").value.trim();
+
+        // 正则：只允许 0-9，且至少一位
+        const isNumber = /^[0-9]+$/.test(value);
+
+        if (isNumber) {
+            const len = value.length;
+          if(len < 9)window.location.href = "https://18comic.vip/album/" + encodeURIComponent(value);
+          else window.location.href = "https://www.pixiv.net/artworks/" + encodeURIComponent(value);
+        } else {
+            alert("内容必须为数字");
+        }
+    }
+
+    // 支持按 Enter
+    document.getElementById("inputBox").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            parseNumber(e);
+        }
+    });
+    </script>
+</body>
+</html>
